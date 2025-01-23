@@ -1,0 +1,98 @@
+/* GuestLogin.css */
+.guest-login-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.guest-login-container h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.view-events-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4c9aff;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.view-events-btn svg {
+    margin-right: 8px;
+}
+
+.view-events-btn:hover {
+    background-color: #3578e5;
+}
+
+.view-events-btn:focus {
+    outline: none;
+}
+
+.event-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.event-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.event-card-header {
+    margin-bottom: 15px;
+}
+
+.event-card-header h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.event-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+}
+
+.event-info {
+    margin-bottom: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.info-item svg {
+    color: #4c9aff;
+    margin-right: 10px;
+}
