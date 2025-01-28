@@ -25,9 +25,7 @@ exports.createEvent = [
     const { eventName, eventDate, eventDescription, eventTime, eventOrganizer } = req.body;
 
     try {
-      // let eventImageUrl = null; // Initialize as null to handle when no image is uploaded
-
-   
+      
       const file = req.file;
       console.log(file,"00000000000000000000000000000000000")
       if (!file) {

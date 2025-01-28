@@ -112,23 +112,20 @@ const attachInterceptor = (axiosInstance) => {
           console.log(originalReq,"=====================")
 
           if (error.response.status === 401 && !originalReq._retry) {
-              originalReq._retry = true; // ✅ Prevent infinite loops
+              originalReq._retry = true; 
               try {
-                  // 🔄 Get a new access token (server sets new cookie)
-                 const res= await customAxios.get('/getNewAccessToken', { withCredentials: true });
-                 const newAccessToken = res.data.accessToken; // Ensure server returns `accessToken`
+                      const res= await customAxios.get('/getNewAccessToken', { withCredentials: true });
+                 const newAccessToken = res.data.accessToken; 
                  const userEmail=res.data.email;
 
                  if (newAccessToken) {
-                   // ✅ Set the token for all future requests
-                   sessionStorage.setItem("accessToken",newAccessToken)
+                         sessionStorage.setItem("accessToken",newAccessToken)
                    sessionStorage.setItem("userEmail",userEmail)
                    
                    axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${newAccessToken}`;
                    originalReq.headers["Authorization"] = `Bearer ${newAccessToken}`;
                  }
-                  // ✅ Retry the failed request (cookie is automatically included)
-                  return axiosInstance(originalReq);
+                       return axiosInstance(originalReq);
               } catch (refreshError) {
                   console.error('Unable to refresh token:', refreshError);
                   alert('Session expired. Please log in again.');
@@ -140,7 +137,7 @@ const attachInterceptor = (axiosInstance) => {
   );
 };
 
-// Attach interceptor to all instances
+
 attachInterceptor(apiUser);
 attachInterceptor(apiEvent);
 attachInterceptor(customAxios);
