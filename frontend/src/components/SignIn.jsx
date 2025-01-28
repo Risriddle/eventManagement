@@ -33,17 +33,13 @@ const SignIn = () => {
       navigate("/")
 
             }
-      
-   
-   
+    
      
     } catch (error) {
       console.error("Error signing up: ", error);
       setError(error.response?.data?.message || "Something went wrong. Please try again.");
     }
-    // } finally {
-    //   setSubmitting(false);
-    // }
+    
   };
 
   return (

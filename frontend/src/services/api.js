@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const apiUser=axios.create(
     {
-        baseURL:"http://127.0.0.1:5000/api/user",
+        baseURL:"http://127.0.0.1:5001/api/user",
         headers: {
             "Content-Type": "application/json", 
         },
@@ -15,14 +15,14 @@ const apiUser=axios.create(
 
 
 const apiEvent = axios.create({
-  baseURL: "http://127.0.0.1:5000/api/event",
+  baseURL: "http://127.0.0.1:5001/api/event",
   withCredentials: true,  
 });
 
 
 const customAxios=axios.create(
   {
-      baseURL:"http://127.0.0.1:5000/api",
+      baseURL:"http://127.0.0.1:5001/api",
       withCredentials: true,
 
   }
@@ -339,6 +339,24 @@ return error.response?.data || { message: "Something went wrong" };
   
     try {
       const response = await apiEvent.post("/getEventById", eventId, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        }
+      });
+      console.log(response.data,"apiiiiii")
+      return response.data;
+
+    } catch (error) {
+      console.error("Error while fetching get eventby id API: ", error.message);
+      return error.response?.data || { message: "Something went wrong" };
+    }
+  }
+
+
+  export const logout=async(accessToken)=>{
+    try {
+      const response = await apiEvent.post("/logout", accessToken, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

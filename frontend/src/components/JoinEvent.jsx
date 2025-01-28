@@ -14,7 +14,7 @@ const JoinEvent = () => {
 
     useEffect(() => {
        
-        const newSocket = io('http://localhost:5000', {
+        const newSocket = io('http://localhost:5001', {
             auth: {
                                 token: token
                             },

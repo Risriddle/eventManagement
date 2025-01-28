@@ -59,10 +59,12 @@ exports.sendMail=async(req,res)=>{
               type: 'OAuth2',
                       user: process.env.MAIL_USERNAME,
                       pass: process.env.MAIL_PASSWORD,
-                      clientId: process.env.OAUTH_CLIENTID,
+                      clientId: process.env.OAUTH_CLIENT_ID,
                       clientSecret: process.env.OAUTH_CLIENT_SECRET,
+                      // accessToken: process.env.OAUTH_ACCESS_TOKEN,
                       refreshToken: process.env.OAUTH_REFRESH_TOKEN,
             },
+           
           });
   
           let mailOptions = {
@@ -185,4 +187,20 @@ exports.guestLogin=async(req, res)=>{
   const guestId = `guest_${Date.now()}`; 
     const guestToken = jwt.sign({ guestId, role: "guest" }, process.env.GUEST_JWT_SECRET, { expiresIn: "1d" });
      return res.json({ message: "Guest session created", guestToken });
+}
+
+
+exports.logout=async(req,res)=>{
+  const refreshToken = req.cookies.refreshToken; 
+  console.log(refreshToken,"refreshToken cookie------------")
+    if (!refreshToken) return res.sendStatus(403);
+  
+    jwt.verify(refreshToken, process.env.REFRESH_JWT_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        res.clearCookie("refreshToken", { httpOnly: true, secure: true, sameSite: "None" });
+
+    res.json({ message: "Logged out successfully" });
+
+    })
+
 }

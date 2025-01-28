@@ -13,7 +13,7 @@ const EventDetail = () => {
     const [socket, setSocket] = useState(null);
 
     useEffect(() => {
-        const newSocket = io('http://localhost:5000', {
+        const newSocket = io('http://localhost:5001', {
             auth: { token: token },
             withCredentials: true,
             transports: ["websocket", "polling"],
