@@ -18,8 +18,9 @@ import EventDetail from './components/EventDetail';
 
 const App = () => {
   return (
+    <BrowserRouter>
     <AuthProvider>
-      <BrowserRouter>
+     
         <Routes>
            
           
@@ -59,8 +60,9 @@ const App = () => {
           />
           </Route>
         </Routes>
-      </BrowserRouter>
+     
     </AuthProvider>
+    </BrowserRouter>
   );
 };
 

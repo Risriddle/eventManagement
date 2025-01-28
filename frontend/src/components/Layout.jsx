@@ -4,12 +4,11 @@ import {useNavigate} from 'react-router-dom'
 import { Menu, Home as HomeIcon, User } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
-import {logout} from '../services/api'
 import "../css/Layout.css";
 
 const Layout = () => {
   const [isAuth, setIsAuth] = useState(false);
-  const {isAuthenticated}=useAuth() 
+  const {isAuthenticated,logout}=useAuth() 
   const navigate=useNavigate()
   useEffect(()=>{
       setIsAuth(isAuthenticated)
@@ -17,12 +16,7 @@ const Layout = () => {
 
 
   const handleLogout = async() => {
-    const accessToken=sessionStorage.getItem("accessToken")
-    await logout(accessToken)
-    sessionStorage.removeItem("accessToken")
-    sessionStorage.removeItem("userEmail")
-    setIsAuth(false); 
-    navigate("/signIn")
+    await logout()
   };
 
   return (

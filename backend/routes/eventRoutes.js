@@ -1,7 +1,6 @@
 const express=require('express')
 const eventController=require('../controllers/eventController')
 const authenticateUser=require('../middlewares/authMiddleware')
-// const checkGuest=require('../middlewares/checkGuestMiddleware')
 const authenticateGuestOrUser=require('../middlewares/authorGuestMiddleware')
 const Router=express.Router()
 

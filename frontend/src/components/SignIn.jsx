@@ -1,45 +1,26 @@
-
-import { React, useState } from 'react';
-import { signInUser } from '../services/api.js';
-import { useNavigate } from 'react-router-dom';
-import '../css/SignIn.css'; 
+import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import '../css/SignIn.css';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [error, setError] = useState('');
   const [isSubmitting, setSubmitting] = useState(false);
-  const navigate = useNavigate();
- 
+  const { login } = useAuth();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-
-    const userData = { email: email, pwd: pass };
+    setSubmitting(true);
+    setError('');
 
     try {
-      setSubmitting(true);
-      setError('');
-
-      const res = await signInUser(userData);
-      console.log(res.user.email,"888888888888888888888888888888")
-      console.log(res, "Signin response");
-      
-     if(res.success){
-      sessionStorage.setItem("accessToken",res.accessToken)
-      sessionStorage.setItem("userEmail",res.user.email)
-      
-      setSubmitting(false)
-      navigate("/")
-
-            }
-    
-     
-    } catch (error) {
-      console.error("Error signing up: ", error);
-      setError(error.response?.data?.message || "Something went wrong. Please try again.");
+      await login(email, pass);
+    } catch (errorMessage) {
+      setError(errorMessage);
+    } finally {
+      setSubmitting(false);
     }
-    
   };
 
   return (
@@ -48,7 +29,7 @@ const SignIn = () => {
         <h2>Sign In to Your Account</h2>
         <form onSubmit={handleSignIn}>
           <div className="input-group">
-            <label htmlFor='email'>Email Address</label>
+            <label htmlFor="email">Email Address</label>
             <input
               type="email"
               id="email"
@@ -60,7 +41,7 @@ const SignIn = () => {
           </div>
 
           <div className="input-group">
-            <label htmlFor='pwd'>Password</label>
+            <label htmlFor="pwd">Password</label>
             <input
               type="password"
               id="pwd"
@@ -78,8 +59,6 @@ const SignIn = () => {
           </button>
         </form>
 
-      
-
         <p className="signup-link">
           Don’t have an account? <a href="/signup">Sign Up</a>
         </p>
@@ -89,6 +68,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
-
-

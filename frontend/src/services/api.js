@@ -206,14 +206,10 @@ attachInterceptor(customAxios);
 
 export const getAllEvents = async () => {
 
- 
-    
+
     const token=sessionStorage.getItem("accessToken")
 
-    const guestToken = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('guestToken='))
-      ?.split('=')[1];
+    const guestToken =sessionStorage.getItem("guestToken")
   
 
       console.log(guestToken,token,"in api getallevents........................")
@@ -313,7 +309,10 @@ return error.response?.data || { message: "Something went wrong" };
     }
   
     try {
-      const response = await apiEvent.post("/deleteEvent", eventId, {
+      const response
+
+
+ = await apiEvent.post("/deleteEvent", eventId, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -354,9 +353,9 @@ return error.response?.data || { message: "Something went wrong" };
   }
 
 
-  export const logout=async(accessToken)=>{
+  export const logoutUser=async()=>{
     try {
-      const response = await apiEvent.post("/logout", accessToken, {
+      const response = await apiEvent.post("/logout", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

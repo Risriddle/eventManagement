@@ -7,7 +7,6 @@ Router.post('/signIn',authController.signIn)
 Router.post('/sendMail',authController.sendMail)
 Router.post('/verifyMail',authController.verifyMail)
 Router.post('/verifyToken',authController.verifyToken)
-// Router.get('/getNewAccessToken',authController.getNewAccessToken)
 Router.get("/guestLogin",authController.guestLogin)
 Router.post("/logout",authController.logout)
 

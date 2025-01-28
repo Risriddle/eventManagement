@@ -7,12 +7,12 @@ import { useAuth } from '../context/AuthContext';
 import "../css/Home.css";
 
 const Home = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  // const [isAuth, setIsAuth] = useState(false);
   const {isAuthenticated}=useAuth() 
   const navigate=useNavigate()
-  useEffect(()=>{
-      setIsAuth(isAuthenticated)
-  },[isAuthenticated])
+  // useEffect(()=>{
+  //     setIsAuth(isAuthenticated)
+  // },[isAuthenticated])
 
   const handleLogin = () => {
     navigate("/signIn")
@@ -35,7 +35,7 @@ const Home = () => {
       <main className="main-content">
         <h1>Welcome to Eventify</h1>
         <p>Plan, manage, and enjoy events seamlessly!</p>
-        {!isAuth ? (
+        {!isAuthenticated ? (
           <div>
             <button className="login-btn" onClick={handleLogin}>Sign In</button>
             <button className="signup-btn" onClick={handleSignUp}>Sign Up</button>
